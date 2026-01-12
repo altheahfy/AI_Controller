@@ -86,7 +86,7 @@ Detailed operational steps are documented separately and are intended to be
 A full conceptual explanation of K-MAD—including its motivation, design philosophy,
 and implications at scale—is available in the main article:
 
-👉 **[Full article URL — to be added]**
+👉 **[Full article URL — (https://altheahfy.github.io/k-mad-en-engineers/)]**
 
 Title:  
 **“K-MAD is for those who can no longer rely on manual code reviews—because Generation has finally overtaken Comprehension.”**
