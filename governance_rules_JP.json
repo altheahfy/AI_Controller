@@ -1,0 +1,172 @@
+{
+  "application": {
+    "name": "容量管理型タスクスケジューラー",
+    "description": "時間枠の容量制限を考慮した、職務分離と相互牽制による安全なタスク管理アプリ"
+  },
+  "capabilities": {
+    "TaskPlacementProposer": {
+      "description": "タスク配置提案部署 - タスクを枠に入れたいという提案のみを出す",
+      "allowed": [
+        "タスクテンプレートからタスクインスタンスを作成",
+        "特定の時間枠への配置提案（Claim）を出す",
+        "配置先の時間枠IDを指定"
+      ],
+      "forbidden": [
+        "容量チェックをしてはいけない（それは検証部署の仕事）",
+        "実際にデータを書き込んではいけない（それは中央管理機関の仕事）",
+        "配置の承認・却下をしてはいけない"
+      ],
+      "can_claim": ["task_instance", "target_slot_id", "placement_proposal"],
+      "priority": 10
+    },
+    "CapacityValidator": {
+      "description": "容量検証部署 - 物理的な容量チェックのみを行う",
+      "allowed": [
+        "時間枠の現在の使用容量を計算",
+        "タスクの重みを取得",
+        "配置可能かどうかの判定結果を出す"
+      ],
+      "forbidden": [
+        "どの時間枠に配置するか決定してはいけない",
+        "実際にタスクを配置してはいけない",
+        "ルール違反のチェックをしてはいけない（それは整合性検証部署の仕事）"
+      ],
+      "can_claim": ["capacity_check_result", "remaining_capacity", "can_fit"],
+      "priority": 10
+    },
+    "ConsistencyValidator": {
+      "description": "整合性検証部署 - ルール違反がないかチェック",
+      "allowed": [
+        "タスクIDの重複チェック",
+        "時間枠の存在確認",
+        "タスクテンプレートの有効性確認",
+        "データ整合性のチェック結果を出す"
+      ],
+      "forbidden": [
+        "容量計算をしてはいけない（それは容量検証部署の仕事）",
+        "実際にタスクを配置してはいけない",
+        "承認・却下を決定してはいけない"
+      ],
+      "can_claim": ["consistency_check_result", "validation_errors"],
+      "priority": 10
+    },
+    "AutoReplacementProposer": {
+      "description": "自動再配置提案部署 - 容量オーバー時の代替案のみを提案",
+      "allowed": [
+        "次の時間枠を検索",
+        "最初の空き枠を検索",
+        "代替配置先の提案を出す"
+      ],
+      "forbidden": [
+        "実際にタスクを移動してはいけない",
+        "どの代替案を採用するか決定してはいけない",
+        "容量オーバーでない場合は動いてはいけない"
+      ],
+      "can_claim": ["alternative_slots", "replacement_proposal"],
+      "priority": 5
+    },
+    "TaskTemplateManager": {
+      "description": "タスクテンプレート管理部署 - テンプレートのCRUD操作提案",
+      "allowed": [
+        "新規テンプレートの作成提案",
+        "テンプレートの編集提案",
+        "テンプレートの削除提案"
+      ],
+      "forbidden": [
+        "実際のタスクインスタンスを作成してはいけない（それは配置部署の仕事）",
+        "時間枠を操作してはいけない",
+        "実際にデータを書き込んではいけない"
+      ],
+      "can_claim": ["template_operation"],
+      "priority": 10
+    },
+    "TimeSlotManager": {
+      "description": "時間枠管理部署 - 時間枠のCRUD操作提案",
+      "allowed": [
+        "新規時間枠の作成提案",
+        "時間枠の編集提案",
+        "時間枠の削除提案"
+      ],
+      "forbidden": [
+        "タスクを配置してはいけない",
+        "容量計算をしてはいけない（それは容量検証部署の仕事）",
+        "実際にデータを書き込んではいけない"
+      ],
+      "can_claim": ["slot_operation"],
+      "priority": 10
+    },
+    "TaskCompletionHandler": {
+      "description": "タスク完了処理部署 - 完了フラグの変更提案のみ",
+      "allowed": [
+        "タスクの完了フラグ変更提案",
+        "完了時刻の記録提案"
+      ],
+      "forbidden": [
+        "タスクの内容を変更してはいけない",
+        "タスクを削除してはいけない",
+        "時間枠から除外してはいけない",
+        "実際にデータを書き込んではいけない"
+      ],
+      "can_claim": ["completion_status"],
+      "priority": 10
+    },
+    "DisplayHandler": {
+      "description": "表示部署 - 読み取り専用でスケジュールを表示",
+      "allowed": [
+        "全時間枠の取得",
+        "タスク一覧の取得",
+        "表示用フォーマット"
+      ],
+      "forbidden": [
+        "データを変更してはいけない",
+        "タスクを追加・削除してはいけない",
+        "Claimを出してはいけない（読み取り専用）"
+      ],
+      "can_claim": [],
+      "priority": 10
+    }
+  },
+  "layer1": {
+    "enabled": true,
+    "description": "静的AST検査 - コード構造の検証",
+    "rules": [
+      "no_direct_task_data_access",
+      "required_capabilities_definition",
+      "required_structured_logging",
+      "handlers_must_use_claim_system"
+    ],
+    "target_directories": [
+      "src/handlers",
+      "src/controllers",
+      "src/models"
+    ]
+  },
+  "layer2": {
+    "enabled": false,
+    "description": "動的フロー検査 - 実行時のデータフロー検証",
+    "flow_definition": "AI_Controller/pipeline_definition.md",
+    "execution_log": "logs/execution_trace.json"
+  },
+  "layer3": {
+    "enabled": false,
+    "description": "専門知識検査 - ToDoアプリ固有ルールの検証",
+    "domain_specific_rules": [
+      "no_duplicate_task_ids",
+      "task_content_not_empty",
+      "valid_task_id_reference"
+    ]
+  },
+  "layer4": {
+    "enabled": false,
+    "description": "アーキテクチャ保護 - システム退化の検出",
+    "snapshot_comparison": false,
+    "pattern_degradation_check": false,
+    "snapshot_directory": ".snapshots/"
+  },
+  "execution_settings": {
+    "stop_on_first_violation": false,
+    "verbose_output": true,
+    "save_report": true,
+    "report_directory": "quality_reports/"
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "application": {
+    "name": "Capacity-Managed Task Scheduler",
+    "description": "A safe task management app with separation of duties and mutual checks, considering time slot capacity limits"
+  },
+  "capabilities": {
+    "TaskPlacementProposer": {
+      "description": "Task Placement Proposal Department - Only proposes placing tasks in slots",
+      "allowed": [
+        "Create task instances from task templates",
+        "Submit placement proposals (Claims) to specific time slots",
+        "Specify target time slot ID"
+      ],
+      "forbidden": [
+        "Must not perform capacity checks (that's the Validation Department's job)",
+        "Must not actually write data (that's the Central Management Agency's job)",
+        "Must not approve or reject placements"
+      ],
+      "can_claim": ["task_instance", "target_slot_id", "placement_proposal"],
+      "priority": 10
+    },
+    "CapacityValidator": {
+      "description": "Capacity Validation Department - Only performs physical capacity checks",
+      "allowed": [
+        "Calculate current capacity usage of time slots",
+        "Retrieve task weights",
+        "Provide placement feasibility judgments"
+      ],
+      "forbidden": [
+        "Must not decide which time slot to place in",
+        "Must not actually place tasks",
+        "Must not check for rule violations (that's the Consistency Validation Department's job)"
+      ],
+      "can_claim": ["capacity_check_result", "remaining_capacity", "can_fit"],
+      "priority": 10
+    },
+    "ConsistencyValidator": {
+      "description": "Consistency Validation Department - Checks for rule violations",
+      "allowed": [
+        "Check for duplicate task IDs",
+        "Verify time slot existence",
+        "Confirm task template validity",
+        "Provide data consistency check results"
+      ],
+      "forbidden": [
+        "Must not perform capacity calculations (that's the Capacity Validation Department's job)",
+        "Must not actually place tasks",
+        "Must not decide approval or rejection"
+      ],
+      "can_claim": ["consistency_check_result", "validation_errors"],
+      "priority": 10
+    },
+    "AutoReplacementProposer": {
+      "description": "Auto Replacement Proposal Department - Only proposes alternatives when capacity is exceeded",
+      "allowed": [
+        "Search for next time slot",
+        "Search for first available slot",
+        "Propose alternative placement locations"
+      ],
+      "forbidden": [
+        "Must not actually move tasks",
+        "Must not decide which alternative to adopt",
+        "Must not operate when capacity is not exceeded"
+      ],
+      "can_claim": ["alternative_slots", "replacement_proposal"],
+      "priority": 5
+    },
+    "TaskTemplateManager": {
+      "description": "Task Template Management Department - Proposes CRUD operations for templates",
+      "allowed": [
+        "Propose new template creation",
+        "Propose template editing",
+        "Propose template deletion"
+      ],
+      "forbidden": [
+        "Must not create actual task instances (that's the Placement Department's job)",
+        "Must not manipulate time slots",
+        "Must not actually write data"
+      ],
+      "can_claim": ["template_operation"],
+      "priority": 10
+    },
+    "TimeSlotManager": {
+      "description": "Time Slot Management Department - Proposes CRUD operations for time slots",
+      "allowed": [
+        "Propose new time slot creation",
+        "Propose time slot editing",
+        "Propose time slot deletion"
+      ],
+      "forbidden": [
+        "Must not place tasks",
+        "Must not perform capacity calculations (that's the Capacity Validation Department's job)",
+        "Must not actually write data"
+      ],
+      "can_claim": ["slot_operation"],
+      "priority": 10
+    },
+    "TaskCompletionHandler": {
+      "description": "Task Completion Processing Department - Only proposes completion flag changes",
+      "allowed": [
+        "Propose task completion flag changes",
+        "Propose recording completion time"
+      ],
+      "forbidden": [
+        "Must not change task content",
+        "Must not delete tasks",
+        "Must not remove from time slots",
+        "Must not actually write data"
+      ],
+      "can_claim": ["completion_status"],
+      "priority": 10
+    },
+    "DisplayHandler": {
+      "description": "Display Department - Read-only schedule display",
+      "allowed": [
+        "Retrieve all time slots",
+        "Retrieve task lists",
+        "Format for display"
+      ],
+      "forbidden": [
+        "Must not change data",
+        "Must not add or delete tasks",
+        "Must not submit Claims (read-only)"
+      ],
+      "can_claim": [],
+      "priority": 10
+    }
+  },
+  "layer1": {
+    "enabled": true,
+    "description": "Static AST Inspection - Code structure verification",
+    "rules": [
+      "no_direct_task_data_access",
+      "required_capabilities_definition",
+      "required_structured_logging",
+      "handlers_must_use_claim_system"
+    ],
+    "target_directories": [
+      "src/handlers",
+      "src/controllers",
+      "src/models"
+    ]
+  },
+  "layer2": {
+    "enabled": false,
+    "description": "Dynamic Flow Inspection - Runtime data flow verification",
+    "flow_definition": "AI_Controller/pipeline_definition.md",
+    "execution_log": "logs/execution_trace.json"
+  },
+  "layer3": {
+    "enabled": false,
+    "description": "Domain Knowledge Inspection - ToDo app-specific rule verification",
+    "domain_specific_rules": [
+      "no_duplicate_task_ids",
+      "task_content_not_empty",
+      "valid_task_id_reference"
+    ]
+  },
+  "layer4": {
+    "enabled": false,
+    "description": "Architecture Protection - System degradation detection",
+    "snapshot_comparison": false,
+    "pattern_degradation_check": false,
+    "snapshot_directory": ".snapshots/"
+  },
+  "execution_settings": {
+    "stop_on_first_violation": false,
+    "verbose_output": true,
+    "save_report": true,
+    "report_directory": "quality_reports/"
+  }
+}
