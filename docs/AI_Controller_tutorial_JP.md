@@ -39,14 +39,12 @@ VS Code / Copilot に次を貼ってください（コピペ用）：
 
 ### コピペ用：最初の指示
 > 次の配布物を**すべて読んで**ください。  
-> - Readme.md  
-> - K-MAD本稿.md（あれば）  
-> - 配布物① governance_gate.py  
-> - 配布物② snapshot_system.py  
-> - 配布物③ governance_rules.json  
-> - 配布物④ central_layer_claim_arbiter.py  
-> - 配布物⑤ pipeline_definition.md
-> - K-MAD_GUIDE.md 
+> - docs/README.md  
+> - 配布物① src/utils/governance_gate.py  
+> - 配布物② src/utils/snapshot_system.py  
+> - 配布物③ src/governance/governance_rules.json  
+> - 配布物④ src/utils/central_layer_claim_arbiter.py  
+> - 配布物⑤ src/pipeline/pipeline_definition.md
 >  
 > **注意：この段階では、まだコード生成・編集を始めないでください。**  
 > まず「理解しました」と宣言し、配布物の役割を短く要約してください。
@@ -55,7 +53,32 @@ VS Code / Copilot に次を貼ってください（コピペ用）：
 
 ---
 
-## 4. GitHub Desktopでリポジトリを作る（必須）
+## 4. 初期セットアップ（2つの方法から選択）
+
+どちらの方法もAIに指示するだけで完了します。  
+**方法A（推奨）**: setup.pyをAIに使ってもらうと効率的  
+**方法B**: AIに個別設定してもらう（従来の手順）
+
+### 方法A：setup.pyを使った一括セットアップ（推奨）
+
+AIに以下を指示してください（コピペ用）：
+
+#### コピペ用：setup.py実行
+> `src/utils/setup.py` を実行して、初期セットアップを完了してください。
+
+これで以下が自動的に設定されます：
+- Gitリポジトリの初期化
+- .gitignoreへの.snapshots/追加
+- pre-commit hookの設定
+- governance_rules.jsonのテンプレート生成
+
+### 方法B：個別設定（AIに一つずつ指示）
+setup.pyを使わず、AIに個別の指示を出して設定します。  
+以下の手順5～8で順次AIに依頼してください。
+
+---
+
+## 5. GitHub Desktopでリポジトリを作る（必須）
 > まだ自動検問所が働いていない状態では、AIは“自由に”前進できます。  
 > **コミット拒否＝物理ブロック**を早めに作るのがコツです。
 
@@ -69,7 +92,7 @@ VS Code / Copilot に次を貼ってください（コピペ用）：
 
 ---
 
-## 5. 作ろうとするアプリの相談～（最初の山場）AIは“親切に”勝手に決め始めます
+## 6. 作ろうとするアプリの相談～（最初の山場）AIは"親切に"勝手に決め始めます
 では、作ろうとするアプリでどんなことを実現したいのかを具体的にAIに説明しましょう。
 そのうえで、それを実現するにはどんな部署（モジュール）と中央管理機関（central_layer_claim_arbiter.py）の組み合わせがいいか、相談してください。
 
@@ -109,18 +132,21 @@ AIが部署案やパイプライン案を出したら、次の2点だけ確認�
 > バグ防止ではなく、**設計の芯**を決める段階です。
 > 内容が難しければ、それ自体AIに相談すればいいのです。
 
-## 6. 憲法の更新
-最終的に納得出来たら、governance_rules.jsonとpipeline_definition.mdを5で決めた内容でAIに更新してもらいましょう。
+## 7. 憲法の更新
+最終的に納得出来たら、governance_rules.jsonとpipeline_definition.mdを6で決めた内容でAIに更新してもらいましょう。
 
 ---
 
-## 7. 自動検問所（governance_Gate.py）をコミット時に必ず動かすようセットする
-AIに次を依頼してください（コピペ用）。
+## 8. 自動検問所（governance_Gate.py）をコミット時に必ず動かすようセットする
+
+**注意：方法Aでsetup.pyを使った場合、この手順は自動で完了しているのでスキップできます。**
+
+方法Bで個別設定を選んだ場合は、AIに次を依頼してください（コピペ用）。
 
 ### コピペ用：自動検問所をコミット前に動かすとともに合格のとき「状態の写真」を撮影する設定
-> GitHub Desktopでコミットする直前に、必ず `governance_gate.py` を実行して、エラーがあればコミットを中止するように設定してください。  
+> GitHub Desktopでコミットする直前に、必ず `src/utils/governance_gate.py` を実行して、エラーがあればコミットを中止するように設定してください。  
 > Windowsの場合、`pre-commit`（Git hook）として動くようにしてください。  
-> さらに、GateがOKを出したときだけ `snapshot_system.py` がスナップショットを撮るように連動させてください。  
+> さらに、GateがOKを出したときだけ `src/utils/snapshot_system.py` がスナップショットを撮るように連動させてください。  
 > できたら「設定したファイル名」と「動作確認の方法」を教えてください。
 
 > ✅ ここでのゴール：**「採用」だけが自動検問所を通る**状態にする。  
@@ -128,18 +154,18 @@ AIに次を依頼してください（コピペ用）。
 
 ---
 
-## 8. 実際の会社組織（中央管理機関＋各部署）とパイプラインを作る
+## 9. 実際の会社組織（中央管理機関＋各部署）とパイプラインを作る
 ここからは、AIと相談しながら進めてOKです。  
-5で協議して決め、6で憲法に書き込んだ内容を元に、central_layer_claim_arbiter.pyを書き換え、各部署（モジュール）作り、接続してもらいましょう。
+6で協議して決め、7で憲法に書き込んだ内容を元に、src/utils/central_layer_claim_arbiter.pyを書き換え、各部署（モジュール）作り、接続してもらいましょう。
 
 ### コピペ用：パイプライン作成
-> このcentral_layer_claim_arbiter.pyをベースにする。このアプリにおける ClaimType（データの種類）を定義し、部署間のデータの流れを pipeline_definition.md に沿って実装して。  
+> src/utils/central_layer_claim_arbiter.py をベースにする。このアプリにおける ClaimType（データの種類）を定義し、部署間のデータの流れを src/pipeline/pipeline_definition.md に沿って実装して。  
 
 > ✅ ここでのゴール：**アプリケーションの基本構造ができる**こと。
 
 ---
 
-## 9. 実装の回し方（以後ずっと同じ）
+## 10. 実装の回し方（以後ずっと同じ）
 あなたがやることは基本これだけです。
 
 1) AIに実装させる（ローカル保存は自由）  
@@ -150,12 +176,12 @@ AIに次を依頼してください（コピペ用）。
 
 ### コピペ用：自動検問所エラー時の指示テンプレ
 > governance_gate.pyでエラーが出ています。  
-> エラーメッセージを読み、配布物（governance_gate.py / governance_rules.json / pipeline_definition.md）に従って、ルール違反がなくなるまで修正してください。  
+> エラーメッセージを読み、配布物（src/utils/governance_gate.py / src/governance/governance_rules.json / src/pipeline/pipeline_definition.md）に従って、ルール違反がなくなるまで修正してください。  
 > 修正したら、再度コミット前チェックを通してください。
 
 ---
 
-## 10. 最後に：見ないと壊れるわけではない。でも、見ると「自分のアプリ」になる
+## 11. 最後に：見ないと壊れるわけではない。でも、見ると「自分のアプリ」になる
 AIは、この手順でも“それっぽい正解”を出します。多くの場合、それは動きます。  
 ただし、それがあなたの作りたい思想を反映した設計とは限りません。
 
