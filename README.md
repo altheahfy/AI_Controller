@@ -1,3 +1,8 @@
+**Language / 言語**
+- [English](#English)
+- [日本語](#日本語)
+
+## English
 # AI_Controller (K-MAD)
 
 > **“Code generation speed has finally overtaken human comprehension speed.”**
@@ -90,6 +95,20 @@ and implications at scale—is available in the main article:
 
 Title:  
 **“K-MAD is for those who can no longer rely on manual code reviews—because Generation has finally overtaken Comprehension.”**
+
+## Related Projects
+
+The following repositories demonstrate practical outcomes and supporting systems related to K-MAD.
+
+- **RephraseUI**  
+  A grammar-aware UI built on structured sentence decomposition.  
+  UI: https://altheahfy.github.io/Rephrase_ui_public/training/index.html
+  Repository: https://github.com/altheahfy/Rephrase_ui_public
+
+- **Sentence Auto-Structuring System (Documentation)**  
+  Materials and architectural notes for the sentence analysis system used in Rephrase.  
+  UI: https://altheahfy.github.io/The-Automated-Sentence-Structuring-System_Public/
+  Repository: https://github.com/yourname/sentence-structuring-docs
 
 ---
 
