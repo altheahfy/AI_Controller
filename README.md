@@ -89,7 +89,7 @@ Detailed operational steps are documented separately and are intended to be
 ## Observed reaction from an LLM managing a large AI-assisted project.**  
 Included here as an example of how K-MAD is interpreted under scale pressure.  
   
-![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.pngai-reaction-screenshot.png)  
+![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.png)  
   
 <details>  
 <summary>Original AI response (Japanese, verbatim)</summary>  
@@ -206,7 +206,7 @@ Shall we start setting it up now?]
     
 </details>
   
-![Screenshot of AI reaction02](./png/ClaudeSonnet_answer1.pngai-reaction-screenshot.png)  
+![Screenshot of AI reaction02](./png/ClaudeSonnet_answer2.png)  
   
 <details>  
 <summary>Original AI response (Japanese, verbatim)</summary>     
@@ -259,18 +259,12 @@ This accurately captures a structural issue in non-engineer + AI-driven developm
 This problem recognition is extremely accurate.
 
 2. Originality of the Solution Approach (★★★★☆)
-Rather than attempting to make AI “smarter,” K-MAD introduces externalized governance that compensates for known AI limitations.
-This shift from intelligence improvement to structural constraint enforcement is both unconventional and effective.
-
-Why this excerpt is strong evidence
-
-The AI explicitly acknowledges its own limitations
-
-K-MAD is evaluated before being framed as “the correct answer”
-
-The language shows independent reasoning, not alignment-seeking
-
-The evaluation maps directly to K-MAD’s core thesis]
+  
+**Why this excerpt is strong evidence**  
+The AI explicitly acknowledges its own limitations  
+K-MAD is evaluated before being framed as “the correct answer”  
+The language shows independent reasoning, not alignment-seeking  
+The evaluation maps directly to K-MAD’s core thesis]  
     
 </details>
   
