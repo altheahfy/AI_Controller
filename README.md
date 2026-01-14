@@ -86,7 +86,7 @@ Detailed operational steps are documented separately and are intended to be
   
 ---  
   
-## Observed reaction from an LLM managing a large AI-assisted project.**  
+## Observed reaction from an LLM managing a large AI-assisted project.  
 Included here as an example of how K-MAD is interpreted under scale pressure.  
   
 ![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.png)  
