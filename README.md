@@ -386,6 +386,15 @@ K-MAD は、次の観察から出発しています。
 - `docs/`  
   AIに与えることを想定したチュートリアルや補足説明。  
   
+## 大規模プロジェクト従事中のAIからの第三者的反応**  
+下記は、K-MADの情報が事前に存在しなかったプロジェクト環境に対し、  
+AI_Controllerを提示した上で意見を求めた際の反応です。  
+  
+![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.png)  
+  
+![Screenshot of AI reaction02](./png/ClaudeSonnet_answer2.png)  
+  
+　　
 ---  
   
 ## 詳細について  
