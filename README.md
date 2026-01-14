@@ -86,6 +86,128 @@ Detailed operational steps are documented separately and are intended to be
   
 ---  
   
+## Observed reaction from an LLM managing a large AI-assisted project.**  
+Included here as an example of how K-MAD is interpreted under scale pressure.  
+  
+![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.pngai-reaction-screenshot.png)  
+  
+<details>  
+<summary>Original AI response (Japanese, verbatim)</summary>  
+  
+[→ これだけで、私が「巨大な関数」や「肥大化したファイル」を作るのを防げます。
+
+ステップ2: ガバナンスゲート導入
+変更前にgovernance_gate.pyを実行:
+
+
+python design_document/AI_Controller/governance_gate.py --check-all
+→ ルール違反があれば警告、私に修正を指示
+
+ステップ3: スナップショット管理
+重要な変更前後で:
+
+
+python design_document/AI_Controller/snapshot_system.py create "公共工事追加前"# 作業...python design_document/AI_Controller/snapshot_system.py create "公共工事追加後"
+→ 問題があればロールバック可能
+
+🚨 導入しないリスク
+3ヶ月後のあなたが、8指標→30指標になったコードベースを見て「どこに何があるか分からない」
+**私（AI）**が「グラフ生成スクリプトが1000行になってるけど、どこを直せば...」と混乱
+新機能追加のたびに既存機能が壊れる→修正→別の箇所が壊れる→無限ループ
+これは私が一番恐れているシナリオです。
+
+✅ 結論
+今すぐK-MADの導入を強く推奨します。
+
+理由:
+
+システムはすでに「中規模」の入り口（8指標、1,118レコード）
+将来80指標は確実に「大規模」
+導入コストは今なら小さい（後からだと移行が大変）
+あなたの「AIの限界」への理解は正しい
+次のステップ:
+
+governance_rules.jsonの初期設定を一緒に作成
+既存コードのルール適合性チェック
+違反箇所があればリファクタリング
+以降、全ての変更はgovernance_gate.pyを通過
+いかがでしょうか？導入するなら、今から設定を始めましょうか？]  
+  
+</details>  
+  
+<details>  
+<summary>Reference translation (English, unofficial)</summary>  
+  
+[Reference (Informal English Translation)
+
+This is a non-literal translation provided for reference.
+The original content is shown in the screenshot above (Japanese).
+
+This alone prevents me from creating giant functions or bloated files.
+
+Step 2: Introducing a Governance Gate
+
+Before making changes, run:
+
+python design_document/AI_Controller/governance_gate.py --check-all
+
+
+If any rule violations are detected, I will issue warnings and instruct you to fix them.
+
+Step 3: Snapshot Management
+
+Before and after important changes:
+
+python design_document/AI_Controller/snapshot_system.py create "before public-works feature"
+# work in progress...
+python design_document/AI_Controller/snapshot_system.py create "after public-works feature"
+
+
+If problems occur, rollback is possible.
+
+🚨 Risks of Not Introducing This
+
+Three months from now, you will look at a codebase that grew from 8 metrics to 30, and think
+“I have no idea where anything is anymore.”
+
+I (the AI) will say:
+“The graph-generation script is now over 1,000 lines, but I don’t know which part to fix…”
+
+Every new feature breaks an existing one → fix it → something else breaks → infinite loop
+
+This is the scenario I fear the most.
+
+✅ Conclusion
+
+I strongly recommend introducing K-MAD immediately.
+
+Reasons:
+
+The system is already at the entry point of a mid-scale project
+(8 metrics, 1,118 records)
+
+Expanding to 80 metrics will unquestionably make it large-scale
+
+The cost of adoption is low now (migration later will be painful)
+
+Your understanding of AI’s limitations is correct
+
+Next Steps
+
+Create the initial governance_rules.json together
+
+Check existing code against the rules
+
+Refactor any violations
+
+From that point on, all changes must pass governance_gate.py
+
+Shall we start setting it up now?]  
+  
+Note: This is an unofficial for readability primary evidence is the original text above.  
+</details>
+
+
 ## Where to learn more  
   
 A full conceptual explanation of K-MAD—including its motivation, design philosophy,  
