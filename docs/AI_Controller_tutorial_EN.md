@@ -39,14 +39,12 @@ Paste the following into VS Code / Copilot (copy-paste ready):
 
 ### Copy-Paste: Initial Instruction
 > Please **read all** of the following distribution files:  
-> - Readme.md  
-> - K-MAD Main Text.md (if available)  
-> - Distribution ① governance_gate.py  
-> - Distribution ② snapshot_system.py  
-> - Distribution ③ governance_rules.json  
-> - Distribution ④ central_layer_claim_arbiter.py  
-> - Distribution ⑤ pipeline_definition.md
-> - K-MAD_GUIDE.md 
+> - docs/README.md  
+> - Distribution ① src/utils/governance_gate.py  
+> - Distribution ② src/utils/snapshot_system.py  
+> - Distribution ③ src/governance/governance_rules.json  
+> - Distribution ④ src/utils/central_layer_claim_arbiter.py  
+> - Distribution ⑤ src/pipeline/pipeline_definition.md
 >  
 > **Note: At this stage, do not start code generation or editing yet.**  
 > First, declare "I understand" and briefly summarize the role of the distribution files.
@@ -55,7 +53,33 @@ Paste the following into VS Code / Copilot (copy-paste ready):
 
 ---
 
-## 4. Create a Repository with GitHub Desktop (Required)
+## 4. Initial Setup (Choose One Method)
+
+Both methods are completed by instructing the AI.  
+**Method A (Recommended)**: Using setup.py is more efficient  
+**Method B**: Have AI configure individual settings (traditional procedure)
+
+### Method A: Batch Setup Using setup.py (Recommended)
+
+Instruct the AI as follows (copy-paste ready):
+
+#### Copy-Paste: Execute setup.py
+> Please execute `src/utils/setup.py` to complete the initial setup.
+
+This will automatically configure:
+- Git repository initialization
+- Adding .snapshots/ to .gitignore
+- Pre-commit hook configuration
+- governance_rules.json template generation
+
+### Method B: Individual Configuration (Instruct AI One by One)
+
+Instead of using setup.py, give individual instructions to the AI.  
+Follow steps 5-8 below to request AI sequentially.
+
+---
+
+## 5. Create a Repository with GitHub Desktop (Required)
 > When the automatic checkpoint is not yet active, the AI can "freely" move forward.  
 > **Commit rejection = physical block** is the trick to establish early.
 
@@ -69,7 +93,7 @@ Paste the following into VS Code / Copilot (copy-paste ready):
 
 ---
 
-## 5. Consultation on the App to Build ~ (First Challenge) AI will "kindly" start deciding on its own
+## 6. Consultation on the App to Build ~ (First Challenge) AI will "kindly" start deciding on its own
 Now, let's explain to the AI in detail what you want to achieve with the app you're going to build.
 Then, consult about what kind of departments (modules) and central management agency (central_layer_claim_arbiter.py) combination would be good to achieve it.
 
@@ -108,18 +132,21 @@ When the AI presents department proposals and pipeline proposals, check only the
 > Not bug prevention, but deciding **the core of the design**.
 > If the content is difficult, you can consult with the AI itself about it.
 
-## 6. Constitution Update
-Once you're finally satisfied, have the AI update governance_rules.json and pipeline_definition.md with the content decided in step 5.
+## 7. Constitution Update
+Once you're finally satisfied, have the AI update governance_rules.json and pipeline_definition.md with the content decided in step 6.
 
 ---
 
-## 7. Set Up the Automatic Checkpoint (governance_Gate.py) to Always Run on Commit
-Request the following from the AI (copy-paste ready).
+## 8. Set Up the Automatic Checkpoint (governance_Gate.py) to Always Run on Commit
+
+**Note: If you used Method A with setup.py, this step is already completed automatically and can be skipped.**
+
+If you chose Method B for individual configuration, request the following from the AI (copy-paste ready).
 
 ### Copy-Paste: Set up automatic checkpoint to run before commit and take "state snapshot" when passed
-> When committing in GitHub Desktop, please set it up so that `governance_gate.py` always runs immediately before, and if there are errors, the commit is canceled.  
+> When committing in GitHub Desktop, please set it up so that `src/utils/governance_gate.py` always runs immediately before, and if there are errors, the commit is canceled.  
 > For Windows, please set it up to work as a `pre-commit` (Git hook).  
-> Furthermore, please link it so that `snapshot_system.py` takes a snapshot only when the Gate gives an OK.  
+> Furthermore, please link it so that `src/utils/snapshot_system.py` takes a snapshot only when the Gate gives an OK.  
 > Once done, please tell me the "name of the file you configured" and "how to verify the operation."
 
 > ✅ Goal here: Set up a state where **only "approval" goes through the automatic checkpoint**.  
@@ -127,18 +154,18 @@ Request the following from the AI (copy-paste ready).
 
 ---
 
-## 8. Create the Actual Company Organization (Central Management Agency + Departments) and Pipeline
+## 9. Create the Actual Company Organization (Central Management Agency + Departments) and Pipeline
 From here, you can proceed while consulting with the AI.  
-Based on what was discussed and decided in step 5 and written into the constitution in step 6, have the AI rewrite central_layer_claim_arbiter.py, create departments (modules), and connect them.
+Based on what was discussed and decided in step 6 and written into the constitution in step 7, have the AI rewrite src/utils/central_layer_claim_arbiter.py, create departments (modules), and connect them.
 
 ### Copy-Paste: Pipeline Creation
-> Use this central_layer_claim_arbiter.py as the base. Define the ClaimType (data types) in this app, and implement the data flow between departments according to pipeline_definition.md.  
+> Use src/utils/central_layer_claim_arbiter.py as the base. Define the ClaimType (data types) in this app, and implement the data flow between departments according to src/pipeline/pipeline_definition.md.  
 
 > ✅ Goal here: **The basic structure of the application is completed**.
 
 ---
 
-## 9. Implementation Cycle (Always the Same Thereafter)
+## 10. Implementation Cycle (Always the Same Thereafter)
 This is basically all you need to do.
 
 1) Have the AI implement (local saving is free)  
@@ -149,12 +176,12 @@ This is basically all you need to do.
 
 ### Copy-Paste: Error Instruction Template for Automatic Checkpoint
 > There is an error in governance_gate.py.  
-> Please read the error message and fix it according to the distribution files (governance_gate.py / governance_rules.json / pipeline_definition.md) until there are no rule violations.  
+> Please read the error message and fix it according to the distribution files (src/utils/governance_gate.py / src/governance/governance_rules.json / src/pipeline/pipeline_definition.md) until there are no rule violations.  
 > After fixing, please go through the pre-commit check again.
 
 ---
 
-## 10. Finally: Not Checking Won't Break It. But Checking Makes It "Your App"
+## 11. Finally: Not Checking Won't Break It. But Checking Makes It "Your App"
 Even with this procedure, the AI will produce "plausible correct answers." In most cases, they will work.  
 However, that doesn't necessarily mean it reflects the philosophy of the design you want to create.
 

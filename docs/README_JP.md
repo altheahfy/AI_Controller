@@ -82,35 +82,49 @@ AIはいつもこう言います：
 
 ```
 your-project/
-├─ README.md（このファイル）
-├─ K-MAD_GUIDE.md（詳細ガイド）
-├─ governance_gate.py（自動検問所）
-├─ snapshot_system.py（「状態の写真」保存システム）
-├─ governance_rules.json / .yaml（自動検問所が守る「憲法」）
-├─ Central Layer_Claim Arbiter.py（中央管理体制・意思決定機関）
-└─ pipeline_definition.md（「一本の道」定義）
+├─ docs/
+│  ├─ README.md（このファイル）
+│  └─ AI_Controller_tutorial.md（詳細チュートリアル）
+├─ src/
+│  ├─ governance/
+│  │  └─ governance_rules.json（「憲法」）
+│  ├─ pipeline/
+│  │  └─ pipeline_definition.md（「一本の道」定義）
+│  └─ utils/
+│     ├─ governance_gate.py（自動検問所）
+│     ├─ snapshot_system.py（監査追跡システム）
+│     ├─ central_layer_claim_arbiter.py（中央管理）
+│     └─ setup.py（セットアップ自動化ユーティリティ）
+└─ .git/（バージョン管理）
 ```
 
-### Step 2: Git Hookを設定
+### Step 2: 初期セットアップ（2つの方法から選択）
 
-**人間の操作（コマンドラインで実行）**：
+どちらの方法もAIに指示するだけで完了します。  
+**方法A（推奨）**: setup.pyをAIに使ってもらうと効率的  
+**方法B**: AIに個別設定してもらう（従来の手順）
 
-#### Windowsの場合
-```bash
-# .git/hooks/pre-commit ファイルを作成
-echo "#!/bin/sh" > .git/hooks/pre-commit
-echo "python governance_gate.py" >> .git/hooks/pre-commit
-```
+#### 方法A：setup.pyを使った一括セットアップ（推奨）
 
-#### Mac/Linuxの場合
-```bash
-# .git/hooks/pre-commit ファイルを作成
-echo "#!/bin/sh" > .git/hooks/pre-commit
-echo "python governance_gate.py" >> .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-```
+AIに以下を指示してください（コピペ用）：
 
-#### .gitignore設定（重要）
+**コピペ用：setup.py実行**
+> `src/utils/setup.py` を実行して、初期セットアップを完了してください。
+
+これで以下が自動的に設定されます：
+- Gitリポジトリの初期化
+- .gitignoreへの.snapshots/追加
+- pre-commit hookの設定
+- governance_rules.jsonのテンプレート生成
+
+#### 方法B：個別設定（AIに一つずつ指示）
+
+setup.pyを使わず、AIに個別の指示を出して設定します。
+
+**コピペ用：Git Hook設定**
+> GitHub Desktopでコミットする直前に、必ず `src/utils/governance_gate.py` を実行して、エラーがあればコミットを中止するように設定してください。Windowsの場合、`pre-commit`（Git hook）として動くようにしてください。さらに、GateがOKを出したときだけ `src/utils/snapshot_system.py` がスナップショットを撮るように連動させてください。
+
+#### .gitignore設定（両方法共通で重要）
 
 **スナップショットフォルダをGit管理から除外してください。**
 
@@ -161,18 +175,18 @@ chmod +x .git/hooks/pre-commit
 
 | ファイル | 役割 |
 |---------|------|
-├─ governance_gate.py（自動検問所）
-├─ snapshot_system.py（「状態の写真」保存システム）
-├─ governance_rules.json / .yaml（自動検問所が守る「憲法」）
-├─ Central Layer_Claim Arbiter.py（中央管理体制・意思決定機関）
-└─ pipeline_definition.md（「一本の道」定義）
+| `governance_gate.py` | 自動検問所（コミット時に全コードを検証） |
+| `snapshot_system.py` | 状態保険システム（コード全文を圧縮保存、7日間保持、指定IDで完全復元可能） |
+| `governance_rules.json / .yaml` | 自動検問所が守る「憲法」（ルール定義） |
+| `central_layer_claim_arbiter.py` | 中央管理体制・意思決定機関（最終承認） |
+| `pipeline_definition.md` | 「一本の道」定義（処理フロー仕様） |
 
 ### ドキュメント
 
 | ファイル | 役割 |
 |---------|------|
 | `README.md` | このファイル（簡潔版） |
-| `K-MAD_GUIDE.md` | 詳細ガイド（本稿全文） |
+| `AI_Controller_tutorial.md` | 詳細チュートリアル |
 
 ---
 
@@ -186,9 +200,6 @@ A: **ありません。** AIがすべて読んで実装します。
 
 **Q: governance_gate.pyは何をしていますか？**
 A: コミット時に全コードをスキャンし、K-MADルール違反を検出します。人間は中身を理解する必要はありません。
-
-**Q: 詳しい情報はどこにありますか？**
-A: `K-MAD_GUIDE.md`を参照してください（詳細な思想・仕組み・事例を収録）。
 
 **Q: governance_rules.jsonの`execution_settings`とは何ですか？**
 A: 検証の実行方法を制御する設定です。
@@ -224,6 +235,6 @@ A: 検証の実行方法を制御する設定です。
 1. **配布物を配置**（Step 1）
 2. **Git Hookを設定**（Step 2）
 3. **AIに指示**（Step 3）
-4. **詳細ガイドを参照**（`K-MAD_GUIDE.md`）
+4. **詳細はチュートリアルを参照**（`AI_Controller_tutorial.md`）
 
 **これで、コードスキルゼロでも大規模アプリ開発が可能になります。**

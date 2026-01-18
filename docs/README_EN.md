@@ -82,35 +82,49 @@ Place all files of this starter kit in the project root.
 
 ```
 your-project/
-├─ README.md (this file)
-├─ K-MAD_GUIDE.md (detailed guide)
-├─ governance_gate.py (automatic checkpoint)
-├─ snapshot_system.py ("state snapshot" save system)
-├─ governance_rules.json / .yaml (the "constitution" protected by automatic checkpoint)
-├─ Central Layer_Claim Arbiter.py (central management system/decision-making agency)
-└─ pipeline_definition.md ("single path" definition)
+├─ docs/
+│  ├─ README.md (this file)
+│  └─ AI_Controller_tutorial.md (detailed tutorial)
+├─ src/
+│  ├─ governance/
+│  │  └─ governance_rules.json (the "constitution")
+│  ├─ pipeline/
+│  │  └─ pipeline_definition.md ("single path" definition)
+│  └─ utils/
+│     ├─ governance_gate.py (automatic checkpoint)
+│     ├─ snapshot_system.py (audit trail system)
+│     ├─ central_layer_claim_arbiter.py (central management)
+│     └─ setup.py (setup automation utility)
+└─ .git/ (version control)
 ```
 
-### Step 2: Set Up Git Hook
+### Step 2: Initial Setup (Choose One Method)
 
-**Human operation (execute in command line)**:
+Both methods are completed by instructing the AI.  
+**Method A (Recommended)**: Using setup.py is more efficient  
+**Method B**: Have AI configure individual settings (traditional procedure)
 
-#### For Windows
-```bash
-# Create .git/hooks/pre-commit file
-echo "#!/bin/sh" > .git/hooks/pre-commit
-echo "python governance_gate.py" >> .git/hooks/pre-commit
-```
+#### Method A: Batch Setup Using setup.py (Recommended)
 
-#### For Mac/Linux
-```bash
-# Create .git/hooks/pre-commit file
-echo "#!/bin/sh" > .git/hooks/pre-commit
-echo "python governance_gate.py" >> .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-```
+Instruct the AI as follows (copy-paste ready):
 
-#### .gitignore Configuration (Important)
+**Copy-Paste: Execute setup.py**
+> Please execute `src/utils/setup.py` to complete the initial setup.
+
+This will automatically configure:
+- Git repository initialization
+- Adding .snapshots/ to .gitignore
+- Pre-commit hook configuration
+- governance_rules.json template generation
+
+#### Method B: Individual Configuration (Instruct AI One by One)
+
+Instead of using setup.py, give individual instructions to the AI.
+
+**Copy-Paste: Set up Git Hook**
+> Please set up a pre-commit hook so that `src/utils/governance_gate.py` is executed before every commit in GitHub Desktop, and the commit is canceled if there are errors. For Windows, please make it work as a `pre-commit` (Git hook). Additionally, please link it so that `src/utils/snapshot_system.py` takes a snapshot only when the Gate gives an OK.
+
+#### .gitignore Configuration (Important for Both Methods)
 
 **Exclude the snapshot folder from Git management.**
 
@@ -162,7 +176,7 @@ Add the following to the `.gitignore` file at project root:
 | File | Role |
 |---------|------|
 | `governance_gate.py` | Automatic checkpoint (validates all code at commit time) |
-| `snapshot_system.py` | "State snapshot" save system (records OK states) |
+| `snapshot_system.py` | State insurance system (compresses and saves full code, 7-day retention, fully restorable by ID) |
 | `governance_rules.json / .yaml` | "Constitution" protected by automatic checkpoint (defines rules) |
 | `central_layer_claim_arbiter.py` | Central management system/decision-making agency (final approval) |
 | `pipeline_definition.md` | "Single path" definition (processing flow specification) |
@@ -172,7 +186,7 @@ Add the following to the `.gitignore` file at project root:
 | File | Role |
 |---------|------|
 | `README.md` | This file (concise version) |
-| `K-MAD_GUIDE.md` | Detailed guide (full text) |
+| `AI_Controller_tutorial.md` | Detailed tutorial |
 
 ---
 
@@ -186,9 +200,6 @@ A: **No.** AI reads and implements everything.
 
 **Q: What does governance_gate.py do?**
 A: It scans all code at commit time and detects K-MAD rule violations. Humans don't need to understand the internals.
-
-**Q: Where can I find detailed information?**
-A: Refer to `K-MAD_GUIDE.md` (contains detailed philosophy, mechanisms, and examples).
 
 **Q: What is `execution_settings` in governance_rules.json?**
 A: Settings that control verification execution methods.
@@ -224,6 +235,6 @@ Humans just change true/false in the config file. Leave implementation to AI.
 1. **Place distribution files** (Step 1)
 2. **Set up Git Hook** (Step 2)
 3. **Instruct AI** (Step 3)
-4. **Refer to detailed guide** (`K-MAD_GUIDE.md`)
+4. **Refer to tutorial for details** (`AI_Controller_tutorial.md`)
 
 **Now, even with zero coding skills, large-scale app development becomes possible.**
