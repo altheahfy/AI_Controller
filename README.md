@@ -287,7 +287,7 @@ and implications at scale—is available in the main article:
 👉 **[Full article URL — (https://altheahfy.github.io/k-mad-en-engineers/)]**  
   
 Title:  
-**“K-MAD is for those who can no longer rely on manual code reviews—because Generation has finally overtaken Comprehension.”**  
+**"K-MAD" A Framework for Mechanically Enforcing Accept/Reject Boundaries on AI-Generated Code～For an Era Where Code Generation Speed Exceeds Human Comprehension Speed～**  
   
 ## Related Projects  
   
