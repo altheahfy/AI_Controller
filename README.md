@@ -5,13 +5,11 @@
 ## English
 # AI_Controller (K-MAD)
 
-> **“Code generation speed has finally overtaken human comprehension speed.”**
+> **“Generation speed has already outpaced human comprehension. This is not a tooling issue—it is a structural inevitability.”**
 
 **AI_Controller** is a reference implementation of **K-MAD**  
 (*Knowledge-Constrained Method for AI-Driven Development*).
-
-K-MAD is for engineers who can no longer rely on traditional manual code reviews—  
-because **generation has finally overtaken comprehension**.
+It provides a **mechanism to automate design specification reviews in an era where manual code review can no longer scale**.
 
 This repository demonstrates how to keep AI-assisted development **governable,
 reviewable, and accountable** when humans can no longer read or fully understand
@@ -28,7 +26,7 @@ all generated code.
   - Humans perform **explicit approval and responsibility**
 - A minimal, inspectable implementation focused on **decision structure**, not automation tricks
 
-This repository exists to show **how AI should be constrained**, not how fast it can generate code.
+This repository exists to show **how AI should be constrained**, not for making AI "smarter," but for making it "governable."
 
 ---
 
@@ -53,12 +51,27 @@ K-MAD starts from a simple observation:
 Instead of attempting exhaustive code-level review, K-MAD shifts the focus to
 **decision-level governance**:
 
+- **Enforcement over Instruction:** A system that replaces fragile "prompts" (instructions) with rigid "constraints" (enforcement) such as Governance Gate and ClaimArbiters.
+- **Externalized Judgment:** A demonstration of how to move the "judgment" of code correctness from the AI's unreliable internal memory to an external, human-defined structural layer.
 - Humans approve *decisions and boundaries*, not raw output
 - Constraints and rules are treated as executable system logic
 - AI operates only within explicitly defined limits
 - Responsibility is never delegated to the AI
 
 This repository shows how those principles can be enforced **structurally**.
+
+
+---
+
+## The Core Philosophy: Why K-MAD?
+
+Traditional AI-driven development fails at scale due to a Structural Inevitability:
+
+**The Review Bottleneck:** As AI generates code faster, the human ability to comprehend and review it remains static, becoming a permanent bottleneck.
+**Local Optimization:** AI suggests locally correct fixes that silently erode the global architecture, leading to "AI-Generated Spaghetti Code."
+**The Illusion of Progress:** Even as AI models improve, development speed does not increase because the safety mechanism (human review) cannot scale.
+
+K-MAD solves this by automating the design specification review itself.
 
 ---
 
@@ -86,8 +99,8 @@ Detailed operational steps are documented separately and are intended to be
   
 ---  
   
-## Observed reaction from an LLM managing a large AI-assisted project.  
-Included here as an example of how K-MAD is interpreted under scale pressure.  
+## Third-Party Evaluation by AI (Evidence of Structural Necessity)  
+Below is the reaction from an AI (Claude 4.5 Sonnet) when presented with the K-MAD framework within a large-scale project environment. 
   
 ![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.png)  
   
@@ -256,13 +269,12 @@ This accurately captures a structural issue in non-engineer + AI-driven developm
 
 This problem recognition is extremely accurate.
 
-2. Originality of the Solution Approach (★★★★☆)
   
 **Why this excerpt is strong evidence**  
-The AI explicitly acknowledges its own limitations  
-K-MAD is evaluated before being framed as “the correct answer”  
-The language shows independent reasoning, not alignment-seeking  
-The evaluation maps directly to K-MAD’s core thesis]  
+- The AI explicitly acknowledges its own limitations  
+- K-MAD is evaluated before being framed as “the correct answer”  
+- The language shows independent reasoning, not alignment-seeking  
+- The AI's conclusion naturally converges with the K-MAD principles as the only viable path to prevent systemic collapse  
     
 </details>
   
@@ -304,9 +316,11 @@ See the `LICENSE` file for details.
   
   
 ## 日本語  
-  
+# AI_Controller
+**コード生成速度は、すでに人間の理解速度を追い越した。これはツールの問題ではなく、構造的な必然である。** 
+
 **AI_Controller** は、**K-MAD**    
-（*Knowledge-Constrained Method for AI-Driven Development*）の考え方を示すためのリファレンス実装です。  
+（*Knowledge-Constrained Method for AI-Driven Development*）の考え方を示すためのリファレンス実装です。手作業によるコードレビューがスケールしなくなった時代において、設計仕様レビューを自動化するための統治機構を提供します。  
   
 エンジニアは、もはや従来の手作業によるコードレビューに頼ることができなくなってきています。なぜなら、**コード生成速度が人間の理解速度を明確に上回ってしまった**からです。K-MAD は、そんなエンジニアのための方法論です。  
   
@@ -354,7 +368,10 @@ K-MAD は、次の観察から出発しています。
 そこで K-MAD は、    
 **コード単位の網羅的レビュー**ではなく、    
 **意思決定単位のガバナンス**へと重心を移します。  
-  
+
+- **Enforcement over Instruction:** プロンプトによる「お願い」ではなく、GateとArbiterによる「執行（Enforcement）」を重視。
+- **Claim-Based Architecture:** あらゆるAI出力を「Claim（主張）」として扱い、統治ゲート（Governance Gate）をパスしたもののみを受理。
+- **From Review to Governance:** 人間の役割を「全行読解（Review）」から「設計整合性の承認（Governance）」へとシフト。  
 - 人間が承認するのは、生成物そのものではなく「判断と境界」  
 - 制約やルールは、実行可能なシステムロジックとして扱う  
 - AIは、明示的に定義された範囲内でのみ動作する  
@@ -362,7 +379,17 @@ K-MAD は、次の観察から出発しています。
   
 本リポジトリは、これらの原則を  
 **構造として実装する一つの方法**を示します。  
-  
+
+---
+
+## なぜ今、K-MADなのか（構造的不可避性）
+従来の手法によるAI開発が中～大規模で破綻するのは、以下の構造的必然があるためです。
+**レビューのボトルネック:** AIの生成速度が上がるほど、人間のコード読解・レビュー能力は相対的に低下し、永続的なボトルネックとなります。
+**局所最適化の罠:** AIは「局所的に正しい」修正を繰り返しますが、それは静かに全体のアーキテクチャを侵食し、やがて「AI製スパゲッティコード」を生成します。
+**開発速度の停滞:** AIの性能が向上しても、安全担保（人間による全行レビュー）がスケールしない限り、実質的な開発速度は向上しません。
+
+K-MADは、人間による「コードレビュー」そのものを自動化・統治することで、この限界を突破します。
+
 --- 
   
 ## 想定される利用方法（概要）  
@@ -387,8 +414,7 @@ K-MAD は、次の観察から出発しています。
   AIに与えることを想定したチュートリアルや補足説明。  
   
 ## 大規模プロジェクト従事中のAIからの第三者的反応  
-下記は、K-MADの情報が事前に存在しなかったプロジェクト環境に対し、  
-AI_Controllerを提示した上で意見を求めた際の反応です。  
+以下は、K-MADの情報を事前に持たない大規模プロジェクト環境において、AI（Claude 4.5 Sonnet）に本システムを提示した際の反応です。 
   
 ![Screenshot of AI reaction01](./png/ClaudeSonnet_answer1.png)  
   
@@ -398,7 +424,7 @@ AI_Controllerを提示した上で意見を求めた際の反応です。
 - AIが、自らの構造的な限界を明確に認識している点    
 - K-MADについて事前の評価軸や誘導が与えられていない状態での反応である点    
 - 文脈上、ユーザーへの迎合や忖度ではなく、独立した評価であることが読み取れる点    
-- 評価結果が、AI自身の立場と制約を考察した結果として、K-MADのロジックに自然に収束している点  
+- 第三者的な立場からの考察結果が、自然とK-MADのロジックに帰着している点  
 　　
 ---  
   
