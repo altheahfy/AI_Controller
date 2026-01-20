@@ -9,7 +9,7 @@
 
 **AI_Controller** is a reference implementation of **K-MAD**  
 (*Knowledge-Constrained Method for AI-Driven Development*).
-It provides a **mechanism to automate design specification reviews in an era where manual code review can no longer scale**.
+It provides a **mechanism to structurally govern design specification decisions in an era where manual code review can no longer scale**.
 
 This repository demonstrates how to keep AI-assisted development **governable,
 reviewable, and accountable** when humans can no longer read or fully understand
@@ -52,7 +52,7 @@ Instead of attempting exhaustive code-level review, K-MAD shifts the focus to
 **decision-level governance**:
 
 - **Enforcement over Instruction:** A system that replaces fragile "prompts" (instructions) with rigid "constraints" (enforcement) such as Governance Gate and ClaimArbiters.
-- **Externalized Judgment:** A demonstration of how to move the "judgment" of code correctness from the AI's unreliable internal memory to an external, human-defined structural layer.
+- **Externalized Judgment:** A demonstration of how to move the accept/reject judgment of code correctness from the AI's unreliable internal memory to an external, human-defined structural layer.
 - Humans approve *decisions and boundaries*, not raw output
 - Constraints and rules are treated as executable system logic
 - AI operates only within explicitly defined limits
@@ -68,7 +68,7 @@ This repository shows how those principles can be enforced **structurally**.
 Traditional AI-driven development fails at scale due to a Structural Inevitability:
 
 **The Review Bottleneck:** As AI generates code faster, the human ability to comprehend and review it remains static, becoming a permanent bottleneck.
-**Local Optimization:** AI suggests locally correct fixes that silently erode the global architecture, leading to "AI-Generated Spaghetti Code."
+**Local Optimization:** AI suggests locally correct fixes that silently erode the global architecture, leading to de-facto system-level spaghetti code.
 **The Illusion of Progress:** Even as AI models improve, development speed does not increase because the safety mechanism (human review) cannot scale.
 
 K-MAD solves this by automating the design specification review itself.
@@ -272,7 +272,7 @@ This problem recognition is extremely accurate.
   
 **Why this excerpt is strong evidence**  
 - The AI explicitly acknowledges its own limitations  
-- K-MAD is evaluated before being framed as “the correct answer”  
+- K-MAD is evaluated **before being framed as “the correct answer”**  
 - The language shows independent reasoning, not alignment-seeking  
 - The AI's conclusion naturally converges with the K-MAD principles as the only viable path to prevent systemic collapse  
     
@@ -320,7 +320,7 @@ See the `LICENSE` file for details.
 **コード生成速度は、すでに人間の理解速度を追い越した。これはツールの問題ではなく、構造的な必然である。** 
 
 **AI_Controller** は、**K-MAD**    
-（*Knowledge-Constrained Method for AI-Driven Development*）の考え方を示すためのリファレンス実装です。手作業によるコードレビューがスケールしなくなった時代において、設計仕様レビューを自動化するための統治機構を提供します。  
+（*Knowledge-Constrained Method for AI-Driven Development*）の考え方を示すためのリファレンス実装です。手作業によるコードレビューがスケールしなくなった時代において、AIの出力を、事前に定義した構造で機械的に拒否／通過させる統治機構を提供します。  
   
 エンジニアは、もはや従来の手作業によるコードレビューに頼ることができなくなってきています。なぜなら、**コード生成速度が人間の理解速度を明確に上回ってしまった**からです。K-MAD は、そんなエンジニアのための方法論です。  
   
@@ -388,7 +388,7 @@ K-MAD は、次の観察から出発しています。
 **局所最適化の罠:** AIは「局所的に正しい」修正を繰り返しますが、それは静かに全体のアーキテクチャを侵食し、やがて「AI製スパゲッティコード」を生成します。
 **開発速度の停滞:** AIの性能が向上しても、安全担保（人間による全行レビュー）がスケールしない限り、実質的な開発速度は向上しません。
 
-K-MADは、人間による「コードレビュー」そのものを自動化・統治することで、この限界を突破します。
+K-MADは、人間による「コードレビュー」を、事前に定義した構造で機械的に拒否／通過させる統治構造によって補完することで、この限界を突破します。
 
 --- 
   
