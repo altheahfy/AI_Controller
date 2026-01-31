@@ -65,15 +65,15 @@ This repository shows how those principles can be enforced **structurally**.
 
 ## The Core Philosophy: Why K-MAD?
 
-Traditional AI-driven development fails at scale due to a Structural Inevitability:
+Traditional AI-driven development fails at scale due to a Structural Inevitability:  
 
-**The Review Bottleneck:** As AI generates code faster, the human ability to comprehend and review it remains static, becoming a permanent bottleneck.
-**Local Optimization:** AI suggests locally correct fixes that silently erode the global architecture, leading to de-facto system-level spaghetti code.
-**The Illusion of Progress:** Even as AI models improve, development speed does not increase because the safety mechanism (human review) cannot scale.
+**The Review Bottleneck:** As AI generates code faster, the human ability to comprehend and review it remains static, becoming a permanent bottleneck.  
+**Local Optimization:** AI suggests locally correct fixes that silently erode the global architecture, leading to de-facto system-level spaghetti code.  
+**The Illusion of Progress:** Even as AI models improve, development speed does not increase because the safety mechanism (human review) cannot scale.  
 
-K-MAD solves this by automating the design specification review itself.
+K-MAD solves this by automating the design specification review itself.  
 
----
+---  
 
 ## How this repository is intended to be used (high level)
 
