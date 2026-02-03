@@ -299,7 +299,8 @@ The following repositories demonstrate practical outcomes and supporting systems
   Repository: https://github.com/altheahfy/Rephrase_ui_public  
    
 - **Sentence Auto-Structuring System (Documentation)**  
-  Materials and architectural notes for the sentence analysis system used in Rephrase.    
+  Materials and architectural notes for the sentence analysis system used in Rephrase.   
+  Note: Beyond its current use for building Rephrase’s example database, this system may also serve as an intermediate structural layer when applying dependency-based NLP engines (e.g., spaCy) to downstream applications.      
   UI: https://altheahfy.github.io/The-Automated-Sentence-Structuring-System_Public/  
   Repository: https://github.com/altheahfy/The-Automated-Sentence-Structuring-System_Doc  
   
@@ -448,7 +449,8 @@ K-MAD の背景、設計思想、そしてスケールしたAI開発における
   Repository: https://github.com/altheahfy/Rephrase_ui_public  
  
 - **例文自動構造化システム (Documentation)**    
-  RephraseUIに表示させるための例文のDBをrawテキストから自動作成するシステム    
+  RephraseUIに表示させるための例文のDBをrawテキストから自動作成するシステム
+  ※本システムは現在、Rephrase用例文DB生成を主目的としているが、依存関係解析系NLPエンジンを業務用途に適用する際の中間構造化レイヤとして活用できる可能性もある。      
   UI: https://altheahfy.github.io/The-Automated-Sentence-Structuring-System_Public/  
   Repository: https://github.com/altheahfy/The-Automated-Sentence-Structuring-System_Doc  
   
