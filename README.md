@@ -328,6 +328,13 @@ See the `LICENSE` file for details.
   
   
 ## 日本語  
+
+> ## 履歴上のリファレンス実装
+>
+> このリポジトリは、K-MADの過去段階における実装を記録したものです。履歴上の参照資料として保存されており、現在のK-MADアーキテクチャまたは現在のStage 1 evidence packageを示すものではありません。
+>
+> **現在のStage 1 publication：** [K-MAD Stage 1 — current publication](https://github.com/altheahfy/K-MAD-Public/blob/main/publication/stage1.md)
+
 # AI_Controller
 **コード生成速度は、すでに人間の理解速度を追い越した。これはツールの問題ではなく、構造的な必然である。** 
 
