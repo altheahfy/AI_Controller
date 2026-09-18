@@ -1,3 +1,11 @@
+> ## Historical / legacy reference implementation
+>
+> This repository represents an earlier implementation stage of K-MAD. It is preserved for historical reference and does not represent the current K-MAD architecture or the current Stage 1 evidence package.
+>
+> **Current Stage 1 publication:** [K-MAD Stage 1 — current publication](https://github.com/altheahfy/K-MAD-Public/blob/main/publication/stage1.en.md)
+
+---
+
 **Language / 言語**
 - [English](#English)
 - [日本語](#日本語)
@@ -281,12 +289,15 @@ This problem recognition is extremely accurate.
 
 ## Where to learn more  
   
-A full conceptual explanation of K-MAD—including its motivation, design philosophy,  
-and implications at scale—is available in the main article:  
-  
-👉 **[Full article URL — (https://altheahfy.github.io/k-mad-en-engineers/)]**  
-  
-Title:  
+Current Stage 1 publication and evidence package:
+
+👉 **[K-MAD Stage 1 — current publication](https://github.com/altheahfy/K-MAD-Public/blob/main/publication/stage1.en.md)**
+
+Earlier long-form article, preserved as historical material:
+
+👉 **[Earlier engineer-oriented article](https://altheahfy.github.io/k-mad-en-engineers/)**
+
+Historical title:
 **"K-MAD" A Framework for Mechanically Enforcing Accept/Reject Boundaries on AI-Generated Code～For an Era Where Code Generation Speed Exceeds Human Comprehension Speed～**  
   
 ## Related Projects  
@@ -431,12 +442,15 @@ K-MADは、人間による「コードレビュー」を、事前に定義した
   
 ## 詳細について  
   
-K-MAD の背景、設計思想、そしてスケールしたAI開発における課題については、  
-以下の本稿で詳しく解説しています。  
-  
-👉 **[本稿URL: (https://altheahfy.github.io/k-mad-jp-engineers/)]**  
-  
-タイトル：  
+現在のStage 1 publication / evidence package：
+
+👉 **[K-MAD Stage 1 — current publication](https://github.com/altheahfy/K-MAD-Public/blob/main/publication/stage1.md)**
+
+履歴として保存している旧エンジニア向け長文記事：
+
+👉 **[旧エンジニア向け記事](https://altheahfy.github.io/k-mad-jp-engineers/)**
+
+過去資料のタイトル：
 **「K-MAD」AI生成コードを、事前定義した構造で機械的に拒否／通過させる仕組～コード生成速度が人間の理解速度を上回る時代へ向けて～**
 
 
@@ -462,4 +476,4 @@ K-MAD の背景、設計思想、そしてスケールしたAI開発における
 本リポジトリは、商標の商用利用権を付与するものではありません。  
   
 本リポジトリは制限付きライセンスのもとで提供されています。    
-詳細は `LICENSE` ファイルを参照してください。  
+詳細は `LICENSE` ファイルを参照してください。
